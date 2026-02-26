@@ -692,17 +692,18 @@ function TouchCard({ touch, isOpen, onToggle }) {
             </span>
             <pre
               style={{
-                background: C.dark,
-                color: C.green,
-                fontFamily: "monospace",
-                fontSize: 13,
+                background: C.white,
+                color: C.dark,
+                fontFamily: "Inter, sans-serif",
+                fontSize: 15,
+                fontWeight: 400,
                 padding: 20,
                 margin: 0,
                 whiteSpace: "pre-wrap",
                 wordBreak: "break-word",
                 border: `2px solid ${C.blue}`,
                 borderRadius: 0,
-                lineHeight: 1.6,
+                lineHeight: 1.7,
               }}
             >
               {touch.script}
@@ -764,17 +765,18 @@ function ObjectionCard({ obj, isOpen, onToggle }) {
         <div style={{ background: C.white, padding: 24 }}>
           <pre
             style={{
-              background: C.dark,
-              color: C.green,
-              fontFamily: "monospace",
-              fontSize: 13,
+              background: C.white,
+              color: C.dark,
+              fontFamily: "Inter, sans-serif",
+              fontSize: 15,
+              fontWeight: 400,
               padding: 20,
               margin: 0,
               whiteSpace: "pre-wrap",
               wordBreak: "break-word",
               border: `2px solid ${C.green}`,
               borderRadius: 0,
-              lineHeight: 1.6,
+              lineHeight: 1.7,
             }}
           >
             {obj.script}
