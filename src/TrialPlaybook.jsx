@@ -787,30 +787,97 @@ function ObjectionCard({ obj, isOpen, onToggle }) {
 }
 
 // ─── PRICING BAR ─────────────────────────────────────────────────
+function PricingGrid({ tiers, borderColor }) {
+  return (
+    <div
+      style={{
+        display: "grid",
+        gridTemplateColumns: "repeat(3, 1fr)",
+        gap: 0,
+        border: `2px solid ${borderColor}`,
+      }}
+    >
+      {tiers.map((tier, i) => (
+        <div
+          key={i}
+          style={{
+            background: tier.highlight ? C.green : C.dark,
+            color: tier.highlight ? C.dark : C.white,
+            padding: "20px 16px",
+            borderRight: i < 2 ? `2px solid ${borderColor}` : "none",
+          }}
+        >
+          <div
+            style={{
+              ...T.label,
+              fontSize: 9,
+              color: tier.highlight ? C.dark : borderColor,
+              marginBottom: 8,
+            }}
+          >
+            {tier.tag}
+          </div>
+          <div
+            style={{
+              ...T.h2,
+              fontSize: 22,
+              color: tier.highlight ? C.dark : C.white,
+              marginBottom: 4,
+            }}
+          >
+            {tier.price}
+          </div>
+          <div
+            style={{
+              ...T.body,
+              fontSize: 13,
+              color: tier.highlight ? C.dark : "#aaa",
+            }}
+          >
+            {tier.name}
+          </div>
+          <div
+            style={{
+              ...T.body,
+              fontSize: 12,
+              color: tier.highlight ? C.dark : "#888",
+              marginTop: 4,
+            }}
+          >
+            {tier.sub}
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+}
+
 function PricingBar() {
-  const tiers = [
-    {
-      name: "Annual Upfront",
-      price: "£749.55",
-      sub: "or 3 × £263",
-      tag: "LEAD WITH THIS",
-      highlight: true,
-    },
-    {
-      name: "3× Instalments",
-      price: "£263 ×3",
-      sub: "Same full-year access",
-      tag: "IF PRICE OBJECTION",
-      highlight: false,
-    },
-    {
-      name: "Monthly",
-      price: "£180/mo",
-      sub: "Cancel anytime",
-      tag: "LAST RESORT",
-      highlight: false,
-    },
+  const ultimateTiers = [
+    { name: "Annual Upfront",  price: "£749.55",  sub: "or 3 × £263",        tag: "LEAD WITH THIS",    highlight: true  },
+    { name: "3× Instalments",  price: "£263 ×3",  sub: "Same full-year access", tag: "IF PRICE OBJECTION", highlight: false },
+    { name: "Monthly",         price: "£180/mo",  sub: "Cancel anytime",     tag: "LAST RESORT",       highlight: false },
   ];
+
+  const singleTiers = [
+    { name: "Annual Upfront",  price: "TBC", sub: "—", tag: "LEAD WITH THIS",    highlight: false },
+    { name: "3× Instalments",  price: "TBC", sub: "—", tag: "IF PRICE OBJECTION", highlight: false },
+    { name: "Monthly",         price: "TBC", sub: "—", tag: "LAST RESORT",       highlight: false },
+  ];
+
+  const sectionLabel = (text, bg, color) => (
+    <div
+      style={{
+        background: bg,
+        color: color,
+        ...T.label,
+        fontSize: 11,
+        padding: "10px 16px",
+      }}
+    >
+      {text}
+    </div>
+  );
 
   return (
     <div
@@ -831,66 +898,27 @@ function PricingBar() {
         Pricing Reference
       </div>
 
+      {/* ── ULTIMATE PASS ── */}
+      <div style={{ border: `2px solid ${C.blue}`, marginBottom: 16 }}>
+        {sectionLabel("Ultimate Pass", C.blue, C.white)}
+        <PricingGrid tiers={ultimateTiers} borderColor={C.blue} />
+      </div>
+
+      {/* ── SINGLE SUBJECT DOWNSELL ── */}
+      <div style={{ border: `2px solid ${C.green}` }}>
+        {sectionLabel("Single Subject — Downsell", C.green, C.dark)}
+        <PricingGrid tiers={singleTiers} borderColor={C.green} />
+      </div>
       <div
         style={{
-          display: "grid",
-          gridTemplateColumns: "repeat(3, 1fr)",
-          gap: 0,
-          border: `2px solid ${C.blue}`,
+          ...T.label,
+          fontSize: 10,
+          color: "#666",
+          marginTop: 8,
+          marginBottom: 16,
         }}
       >
-        {tiers.map((tier, i) => (
-          <div
-            key={i}
-            style={{
-              background: tier.highlight ? C.green : C.dark,
-              color: tier.highlight ? C.dark : C.white,
-              padding: "20px 16px",
-              borderRight: i < 2 ? `2px solid ${C.blue}` : "none",
-              position: "relative",
-            }}
-          >
-            <div
-              style={{
-                ...T.label,
-                fontSize: 9,
-                color: tier.highlight ? C.dark : C.green,
-                marginBottom: 8,
-              }}
-            >
-              {tier.tag}
-            </div>
-            <div
-              style={{
-                ...T.h2,
-                fontSize: 22,
-                color: tier.highlight ? C.dark : C.white,
-                marginBottom: 4,
-              }}
-            >
-              {tier.price}
-            </div>
-            <div
-              style={{
-                ...T.body,
-                fontSize: 13,
-                color: tier.highlight ? C.dark : "#aaa",
-              }}
-            >
-              {tier.name}
-            </div>
-            <div
-              style={{
-                ...T.body,
-                fontSize: 12,
-                color: tier.highlight ? C.dark : "#888",
-                marginTop: 4,
-              }}
-            >
-              {tier.sub}
-            </div>
-          </div>
-        ))}
+        ⚠ Single subject prices TBD — update before use
       </div>
 
       <div
@@ -898,7 +926,6 @@ function PricingBar() {
           ...T.body,
           fontSize: 14,
           color: C.green,
-          marginTop: 16,
           fontWeight: 700,
         }}
       >
