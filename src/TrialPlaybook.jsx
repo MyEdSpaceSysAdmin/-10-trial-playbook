@@ -1,3 +1,4 @@
+/* v2 — white script blocks, Inter font, Ultimate Pass pricing labels */
 import { useState } from "react";
 
 // ─── BRAND TOKENS ────────────────────────────────────────────────
